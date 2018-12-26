@@ -1,0 +1,4 @@
+#import modules
+import pandas as pd  # for dataframes
+import matplotlib.pyplot as plt # for plotting graphs
+%matplotlib inline
