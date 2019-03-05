@@ -2,3 +2,23 @@
 import pandas as pd  # for dataframes
 import matplotlib.pyplot as plt # for plotting graphs
 %matplotlib inline
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+df=pd.read_csv("Salary_new.csv")
+df.columns
+k=['Gender','Location',       'Class', 'Job_Title', 'Salary', 'age']
+df=df[k]
+k=(df.Location.value_counts()>26)*1
+k1=[x for x in k.index if k[x]==1]
+df1=df[df['Location'].isin(k1)]
+df2=df1.pivot_table(columns="Location",values="Salary",index="Job_Title")
+df2=df2.dropna(thresh=6)
+df2.fillna(0,inplace=True)
+df2=df2.round(2)
+k2=df2.index
+df3=df[df["Job_Title"].isin(k2)]
+df3["Salary"]=df3.Salary.round(2)
+df4=df3.pivot_table(columns="Job_Title",values="Salary",index=['Location','age'])
+df4=df4.dropna(thresh=3)
